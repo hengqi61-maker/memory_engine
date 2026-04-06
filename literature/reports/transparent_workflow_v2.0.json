@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "created": "2026-04-05T20:07:13.401903",
+    "purpose": "记忆引擎项目文献检索 - 透明可验证工作流",
+    "critical_note": "⚠️ 基于历史教训：2026-03-29的文献检索Agent虚构了引用"
+  },
+  "phases": [
+    {
+      "phase": 1,
+      "name": "需求分析",
+      "steps": [
+        "明确记忆引擎每个模块的文献需求",
+        "列出所需的关键理论模型（PAD, Baddeley等）",
+        "设置关键词和搜索范围"
+      ],
+      "outputs": [
+        "topics_needed.json"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "平台评估",
+      "steps": [
+        "评估可用数据源（arXiv > Google Scholar > 学校订阅）",
+        "检查网络访问权限和API限制",
+        "准备替代方案以防主平台受限"
+      ],
+      "outputs": [
+        "platform_assessment.md"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "真实搜索执行",
+      "steps": [
+        "执行实际搜索（不使用虚构内容）",
+        "记录搜索结果数量和关键信息",
+        "下载可获取的PDF文件"
+      ],
+      "outputs": [
+        "search_results.json",
+        "downloaded_pdfs/"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "文献整理与验证",
+      "steps": [
+        "保存PDF文件到专用文件夹",
+        "验证PDF内容和相关性",
+        "创建文献综述摘要"
+      ],
+      "outputs": [
+        "literature_summary.md",
+        "verification_log.txt"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "质量与透明度审计",
+      "steps": [
+        "检查是否有虚构内容",
+        "确保所有引用都可追溯",
+        "生成可验证性报告"
+      ],
+      "outputs": [
+        "audit_report.md",
+        "verification_checklist.txt"
+      ]
+    }
+  ],
+  "safety_measures": [
+    "任何检索失败都必须报告，不得编造结果",
+    "所有PDF文件都必须真实保存在本地供验证",
+    "搜索参数和结果必须详细记录",
+    "用户可随时审计任何引用来源"
+  ],
+  "file_structure": {
+    "literature/": {
+      "pdfs/": "存储所有下载的PDF文件（按日期/主题组织）",
+      "reports/": "文献综述和分析报告",
+      "metadata/": "搜索参数、时间戳、结果等元数据",
+      "citations/": "标准格式的引用信息",
+      "audits/": "透明度审计记录"
+    }
+  }
+}

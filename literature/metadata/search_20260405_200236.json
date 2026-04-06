@@ -1,0 +1,83 @@
+{
+  "search_id": "search_20260405_200236",
+  "timestamp": "2026-04-05T20:02:36.293079",
+  "search_params": {
+    "topics": [
+      {
+        "id": "topic_1",
+        "name": "PAD情绪模型",
+        "keywords": [
+          "PAD emotion model",
+          "Mehrabian Russell",
+          "pleasure arousal dominance"
+        ],
+        "description": "需要真实论文，之前报告中的引用是虚构的",
+        "priority": "高"
+      },
+      {
+        "id": "topic_2",
+        "name": "艾宾浩斯遗忘曲线",
+        "keywords": [
+          "Ebbinghaus forgetting curve",
+          "memory decay",
+          "forgetting curve"
+        ],
+        "description": "需要真实论文，之前报告中的引用是虚构的",
+        "priority": "高"
+      },
+      {
+        "id": "topic_3",
+        "name": "工作记忆模型",
+        "keywords": [
+          "working memory model",
+          "Baddeley",
+          "central executive",
+          "phonological loop"
+        ],
+        "description": "已有部分正确信息，需要补充原始文献",
+        "priority": "中"
+      },
+      {
+        "id": "topic_4",
+        "name": "记忆检索理论",
+        "keywords": [
+          "memory retrieval",
+          "recall association",
+          "retrieval theory"
+        ],
+        "description": "现有报告有基础信息，需要学术支撑",
+        "priority": "中"
+      }
+    ],
+    "platforms": [
+      {
+        "name": "情绪与记忆关系",
+        "url": "https://arxiv.org/search/?query=emotion+AND+memory+AND+psychology&searchtype=all&source=header",
+        "description": "搜索情绪与记忆相互作用的研究"
+      },
+      {
+        "name": "工作记忆模型",
+        "url": "https://arxiv.org/search/?query=working+memory+model+Baddeley&searchtype=all",
+        "description": "Baddeley工作记忆模型相关论文"
+      },
+      {
+        "name": "记忆巩固理论",
+        "url": "https://arxiv.org/search/?query=memory+consolidation+theory&searchtype=all",
+        "description": "记忆巩固与存储机制"
+      },
+      {
+        "name": "检索相似度计算",
+        "url": "https://arxiv.org/search/?query=retrieval+similarity+cognitive+science&searchtype=all",
+        "description": "认知科学中的相似度计算与检索"
+      }
+    ],
+    "workflow_version": "v2.0_transparent",
+    "anti_fiction_mode": "enabled",
+    "notes": "所有搜索必须是真实的，空白结果可接受，虚构结果不可接受"
+  },
+  "results_count": 0,
+  "results": [],
+  "platform": "arxiv",
+  "version": "v2.0_transparent_workflow",
+  "notes": "基于历史教训重建 - 严禁虚构文献引用"
+}

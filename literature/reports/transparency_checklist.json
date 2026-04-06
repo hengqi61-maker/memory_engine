@@ -1,0 +1,41 @@
+{
+  "checklist_id": "transparency_v1.0",
+  "created": "2026-04-05T20:07:13.407845",
+  "items": [
+    {
+      "id": "check_1",
+      "question": "是否有真实的PDF文件保存在`pdfs/`文件夹？",
+      "purpose": "防止虚构引用",
+      "expected": "是，必须有具体的.f文件存在"
+    },
+    {
+      "id": "check_2",
+      "question": "搜索参数是否正确记录在`metadata/`中？",
+      "purpose": "保证过程可追溯",
+      "expected": "必须有详细的搜索时间、关键词、平台等信息"
+    },
+    {
+      "id": "check_3",
+      "question": "文献综述是否基于真实的PDF内容？",
+      "purpose": "确保结论有依据",
+      "expected": "报告中的每个观点都应该引用具体的PDF页码和内容"
+    },
+    {
+      "id": "check_4",
+      "question": "所有引用是否都可追溯到具体的PDF文件？",
+      "purpose": "实现完全可验证性",
+      "expected": "每个引用都应该指明哪个PDF文件的哪一页"
+    },
+    {
+      "id": "check_5",
+      "question": "是否有任何虚构或编造的内容？",
+      "purpose": "杜绝上次的欺骗行为",
+      "expected": "绝对不能有，空白也比虚构好"
+    }
+  ],
+  "verification_methods": [
+    "用户可随时随机抽查任何引用",
+    "系统定期审计PDF文件与报告的对应关系",
+    "所有搜索失败都应如实报告，不得隐藏"
+  ]
+}

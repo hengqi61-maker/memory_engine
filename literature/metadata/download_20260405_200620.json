@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-05T20:06:20.116678",
+  "url": "https://arxiv.org/pdf/2004.09743.pdf",
+  "filename": "arxiv_PAD情绪模型_20260405_200616_1.pdf",
+  "description": "PAD情绪模型 - Mehrabian & Russell的情绪三维模型",
+  "size_bytes": 2582440,
+  "verification": {
+    "valid": true,
+    "size_kb": 2521,
+    "type": "PDF"
+  },
+  "source": "real_download"
+}

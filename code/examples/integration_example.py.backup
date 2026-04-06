@@ -1,0 +1,301 @@
+#!/usr/bin/env python3
+"""
+集成示例：将WorkingMemory模块集成到OpenClawMemoryEngine中
+"""
+
+import sys
+import os
+
+# 添加当前目录到路径以便导入
+sys.path.insert(0, os.path.dirname(__file__))
+
+# 假设原有OpenClawMemoryEngine类的修改版本
+class OpenClawMemoryEngineEnhanced:
+    """增强版的记忆引擎，集成WorkingMemory"""
+    
+    def __init__(self, memory_name="memory_store", api_key=None, base_url=None, 
+                 enable_archive=True, archive_dir=None, working_memory_capacity=20):
+        """
+        初始化增强版记忆引擎
+        
+        Args:
+            working_memory_capacity: 工作记忆缓冲区容量
+        """
+        # ... 原有初始化代码保持不变 ...
+        
+        # 导入WorkingMemory模块
+        try:
+            from working_memory_fixed import WorkingMemory, EncodedMemory, MemoryType
+            self.WorkingMemory = WorkingMemory
+            self.EncodedMemory = EncodedMemory
+            self.MemoryType = MemoryType
+        except ImportError as e:
+            print(f"[WARN] 无法导入WorkingMemory模块: {e}")
+            self.WorkingMemory = None
+        
+        # 初始化工作记忆
+        if self.WorkingMemory:
+            self.working_memory = WorkingMemory(
+                capacity=working_memory_capacity,
+                embedding_backend="ollama"  # 优先使用Ollama
+            )
+            print(f"[INFO] 工作记忆初始化完成，容量={working_memory_capacity}")
+        else:
+            self.working_memory = None
+            print("[INFO] 工作记忆不可用，使用原有短期缓冲区")
+        
+        # 原有的短期缓冲区（保持兼容性）
+        self.short_term_buffer = []
+        
+        # ... 其余原有代码 ...
+    
+    def ingest_log_file(self, file_path):
+        """摄入日志文件 - 增强版"""
+        if not os.path.exists(file_path):
+            print(f"[ERROR] 文件不存在: {file_path}")
+            return
+        
+        with open(file_path, "r", encoding="utf-8") as f:
+            text = f.read()
+        
+        # 使用原有的_split_text方法
+        chunks = self._split_text(text)
+        print(f"[大脑] 开始处理 {len(chunks)} 个记忆片段...")
+        
+        for i, chunk in enumerate(chunks):
+            # 评估重要性
+            metadata = self._evaluate_signal(chunk)
+            
+            # 如果有工作记忆，使用工作记忆编码
+            if self.working_memory:
+                encoded_mem = self.working_memory.encode(
+                    content=chunk[:500],
+                    importance=metadata['importance'],
+                    source=file_path,
+                    tags=[metadata['type']]
+                )
+                
+                # 同时添加到原有缓冲区以保持兼容
+                memory = {
+                    "id": encoded_mem.id,
+                    "content": encoded_mem.content,
+                    "vec": encoded_mem.embedding_vector.tolist() if encoded_mem.embedding_vector is not None else [],
+                    "importance": encoded_mem.importance,
+                    "type": encoded_mem.chunk_type.value,
+                    "timestamp": encoded_mem.timestamp.isoformat()
+                }
+                self.short_term_buffer.append(memory)
+                
+                print(f"   [{i+1}/{len(chunks)}] 工作记忆编码完成")
+                print(f"     类型:{encoded_mem.chunk_type.value} 权重:{encoded_mem.importance:.1f}")
+                print(f"     关键词:{', '.join(encoded_mem.semantic_features[:3])}")
+            else:
+                # 降级到原有逻辑
+                vec = self._embed(chunk)
+                memory = {
+                    "id": f"{datetime.now().strftime('%Y%m%d')}_{i}",
+                    "content": chunk[:500],
+                    "vec": vec.tolist(),
+                    "importance": metadata['importance'],
+                    "type": metadata['type'],
+                    "timestamp": datetime.now().isoformat()
+                }
+                self.short_term_buffer.append(memory)
+                print(f"   [{i+1}/{len(chunks)}] 类型:{metadata['type']} 权重:{metadata['importance']:.1f}")
+        
+        print(f"[完成] 成功摄入 {len(chunks)} 条记忆")
+    
+    def sleep_cycle(self, enable_pruning=True):
+        """睡眠周期 - 增强版"""
+        print("\n[睡眠] 开始记忆巩固...")
+        
+        # 如果有工作记忆，使用工作记忆中的记忆
+        if self.working_memory and self.working_memory.buffer:
+            # 获取工作记忆中的所有记忆
+            working_memories = list(self.working_memory.buffer.values())
+            
+            # 转换为原有格式以保持兼容
+            self.short_term_buffer = []
+            for mem in working_memories:
+                self.short_term_buffer.append({
+                    "id": mem.id,
+                    "content": mem.content,
+                    "vec": mem.embedding_vector.tolist() if mem.embedding_vector is not None else [],
+                    "importance": mem.importance,
+                    "type": mem.chunk_type.value,
+                    "timestamp": mem.timestamp.isoformat()
+                })
+            
+            print(f"[工作记忆] 使用 {len(working_memories)} 条工作记忆进行压缩")
+        
+        if not self.short_term_buffer:
+            print("📭 短期缓存为空，跳过睡眠周期")
+            return
+        
+        # ... 原有的筛选、压缩、归档逻辑保持不变 ...
+        # 这里简化为直接调用原有方法
+        print(f"[处理] 处理 {len(self.short_term_buffer)} 条记忆...")
+        
+        # 原有的筛选逻辑
+        survived = self._filter_memories()
+        print(f"[统计] 筛选后保留 {len(survived)} 条记忆")
+        
+        # 原有的压缩逻辑
+        new_facts = self._consolidate(survived)
+        
+        # 添加到长期记忆
+        self.long_term_knowledge.extend(new_facts)
+        
+        # 清空短期缓冲区和工作记忆
+        self.short_term_buffer = []
+        if self.working_memory:
+            self.working_memory.clear()
+        
+        # 保存记忆
+        summary = self._generate_summary()
+        self.storage.save_atomic(self.long_term_knowledge, summary)
+        
+        print(f"[完成] 睡眠周期完成，添加了 {len(new_facts)} 条新事实到长期记忆")
+    
+    def retrieve_with_working_memory(self, query_text, top_k=5, min_similarity=0.3):
+        """使用工作记忆进行检索"""
+        if not self.working_memory:
+            print("[WARN] 工作记忆不可用，使用原有检索")
+            return self.retrieve(query_text, top_k)
+        
+        print(f"[工作记忆检索] 查询: '{query_text}'")
+        
+        # 同时从工作记忆和长期记忆中检索
+        working_results = self.working_memory.query_similar(
+            query_text, top_k=top_k, min_similarity=min_similarity
+        )
+        
+        # 原有长期记忆检索
+        long_term_results = self.retrieve(query_text, top_k=top_k)
+        
+        # 合并结果
+        all_results = []
+        
+        # 添加工作记忆结果
+        for mem, similarity in working_results:
+            all_results.append({
+                "source": "working_memory",
+                "content": mem.content,
+                "type": mem.chunk_type.value,
+                "similarity": similarity,
+                "importance": mem.importance,
+                "timestamp": mem.timestamp
+            })
+        
+        # 添加长期记忆结果
+        for res in long_term_results:
+            all_results.append({
+                "source": "long_term",
+                "content": res.get('fact', res.get('content', '')),
+                "type": res.get('type', 'unknown'),
+                "similarity": res.get('similarity', 0),
+                "importance": res.get('confidence', 0.5),
+                "timestamp": res.get('timestamp', '')
+            })
+        
+        # 按相似度排序
+        all_results.sort(key=lambda x: x['similarity'], reverse=True)
+        
+        print(f"[工作记忆检索] 找到 {len(all_results)} 条相关记忆")
+        for i, res in enumerate(all_results[:min(top_k, 5)]):
+            print(f"  {i+1}. [{res['source']}] {res['type']} 相似度:{res['similarity']:.3f}")
+            print(f"     内容: {res['content'][:80]}...")
+        
+        return all_results[:top_k]
+    
+    def get_memory_stats(self):
+        """获取记忆统计信息 - 增强版"""
+        stats = self.get_stats()  # 原有统计方法
+        
+        if self.working_memory:
+            working_stats = self.working_memory.get_buffer_stats()
+            stats['working_memory'] = working_stats
+        
+        return stats
+    
+    def save_full_state(self, base_path):
+        """保存完整状态"""
+        # 保存原有记忆
+        # self.storage.save_atomic(...)
+        
+        # 保存工作记忆
+        if self.working_memory:
+            self.working_memory.save_buffer(base_path + ".working_memory.json")
+        
+        print(f"[保存] 完整状态已保存到 {base_path}")
+    
+    def load_full_state(self, base_path):
+        """加载完整状态"""
+        # 加载原有记忆
+        # ...
+        
+        # 加载工作记忆
+        if self.working_memory:
+            self.working_memory.load_buffer(base_path + ".working_memory.json")
+        
+        print(f"[加载] 从 {base_path} 加载完整状态")
+
+
+# =========== 示例使用 ===========
+def example_usage():
+    """示例使用方法"""
+    print("=" * 70)
+    print("WorkingMemory集成示例")
+    print("=" * 70)
+    
+    print("""
+1. 首先，将working_memory_fixed.py复制到您的项目目录。
+
+2. 修改openclaw_memory_engine_fixed.py，添加以下导入:
+   
+   try:
+       from working_memory_fixed import WorkingMemory, EncodedMemory, MemoryType
+       WORKING_MEMORY_AVAILABLE = True
+   except ImportError:
+       WORKING_MEMORY_AVAILABLE = False
+   
+3. 在__init__方法中添加工作记忆初始化:
+   
+   if WORKING_MEMORY_AVAILABLE:
+       self.working_memory = WorkingMemory(capacity=20, embedding_backend="ollama")
+   else:
+       self.working_memory = None
+   
+4. 修改ingest_log_file方法，使用工作记忆编码。
+   
+5. 修改sleep_cycle方法，从工作记忆获取记忆。
+   
+6. 添加新的检索方法retrieve_with_working_memory。
+   
+7. 可选：添加状态保存/加载方法。
+    """)
+    
+    print("\n主要优势:")
+    print("""
+   - 更好的短期记忆管理（LRU替换策略）
+   - 更丰富的特征表示（向量嵌入 + 语义关键词）
+   - 自动类型分类（fact/decision/opinion/instruction等）
+   - 多种嵌入后端支持，优雅降级
+   - 相似性查询更准确
+    """)
+    
+    print("\n注意事项:")
+    print("""
+   - 确保安装了可选依赖（ollama, sentence-transformers, scikit-learn）
+   - 如果没有安装，系统会自动降级到伪嵌入和基于规则的特征提取
+   - 工作记忆缓冲区容量默认20，可根据需要调整
+   - 集成后，原有API保持兼容
+    """)
+    
+    print("\n" + "=" * 70)
+    print("集成示例结束")
+    print("=" * 70)
+
+
+if __name__ == "__main__":
+    example_usage()

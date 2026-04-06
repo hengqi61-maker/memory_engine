@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-04-05T20:06:50.690355",
+  "search_topics": [
+    {
+      "topic": "PAD情绪模型",
+      "description": "Mehrabian & Russell的情绪三维模型",
+      "arxiv_url": "https://arxiv.org/search/?query=PAD+emotion+model+psychology&searchtype=all",
+      "direct_pdf_urls": [
+        "https://arxiv.org/pdf/2004.09743.pdf",
+        "https://arxiv.org/pdf/1612.08983.pdf"
+      ]
+    },
+    {
+      "topic": "工作记忆模型",
+      "description": "Baddeley的多成分工作记忆模型",
+      "arxiv_url": "https://arxiv.org/search/?query=working+memory+model+Baddley&searchtype=all",
+      "direct_pdf_urls": [
+        "https://arxiv.org/pdf/2105.12334.pdf",
+        "https://arxiv.org/pdf/1906.05765.pdf"
+      ]
+    },
+    {
+      "topic": "记忆检索理论",
+      "description": "记忆检索的神经机制与理论",
+      "arxiv_url": "https://arxiv.org/search/?query=memory+retrieval+theory&searchtype=all",
+      "direct_pdf_urls": [
+        "https://arxiv.org/pdf/1806.01721.pdf",
+        "https://arxiv.org/pdf/1708.00129.pdf"
+      ]
+    },
+    {
+      "topic": "记忆巩固理论",
+      "description": "记忆从短时存储到长时存储的过程",
+      "arxiv_url": "https://arxiv.org/search/?query=memory+consolidation&searchtype=all",
+      "direct_pdf_urls": [
+        "https://arxiv.org/pdf/1910.07773.pdf",
+        "https://arxiv.org/pdf/1804.03133.pdf"
+      ]
+    }
+  ],
+  "downloaded_count": 8,
+  "downloaded_files": [
+    {
+      "topic": "PAD情绪模型",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_PAD情绪模型_20260405_200616_1.pdf",
+      "url": "https://arxiv.org/pdf/2004.09743.pdf",
+      "description": "Mehrabian & Russell的情绪三维模型"
+    },
+    {
+      "topic": "PAD情绪模型",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_PAD情绪模型_20260405_200621_2.pdf",
+      "url": "https://arxiv.org/pdf/1612.08983.pdf",
+      "description": "Mehrabian & Russell的情绪三维模型"
+    },
+    {
+      "topic": "工作记忆模型",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_工作记忆模型_20260405_200626_1.pdf",
+      "url": "https://arxiv.org/pdf/2105.12334.pdf",
+      "description": "Baddeley的多成分工作记忆模型"
+    },
+    {
+      "topic": "工作记忆模型",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_工作记忆模型_20260405_200629_2.pdf",
+      "url": "https://arxiv.org/pdf/1906.05765.pdf",
+      "description": "Baddeley的多成分工作记忆模型"
+    },
+    {
+      "topic": "记忆检索理论",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_记忆检索理论_20260405_200634_1.pdf",
+      "url": "https://arxiv.org/pdf/1806.01721.pdf",
+      "description": "记忆检索的神经机制与理论"
+    },
+    {
+      "topic": "记忆检索理论",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_记忆检索理论_20260405_200637_2.pdf",
+      "url": "https://arxiv.org/pdf/1708.00129.pdf",
+      "description": "记忆检索的神经机制与理论"
+    },
+    {
+      "topic": "记忆巩固理论",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_记忆巩固理论_20260405_200642_1.pdf",
+      "url": "https://arxiv.org/pdf/1910.07773.pdf",
+      "description": "记忆从短时存储到长时存储的过程"
+    },
+    {
+      "topic": "记忆巩固理论",
+      "filepath": "C:\\Users\\Lenovo\\.openclaw\\workspace\\memory_engine\\literature\\pdfs\\arxiv_记忆巩固理论_20260405_200645_2.pdf",
+      "url": "https://arxiv.org/pdf/1804.03133.pdf",
+      "description": "记忆从短时存储到长时存储的过程"
+    }
+  ],
+  "search_platform": "arXiv",
+  "workflow_version": "v2.0_transparent"
+}
