@@ -43,6 +43,37 @@ memory_engine/
 ├── test_emotion.py
 └── replace_all_unicode.py
 ```
+memory_engine/
+├── 📁 code/                       # 核心代码实现
+│   └── 📁 modules/                # 模块化组件
+│       ├── emotional_appraisal.py           # 情感评估
+│       ├── enhanced_working_memory.py       # 增强工作记忆
+│       ├── long_term_storage.py             # 长期存储
+│       ├── recall_association.py            # 回忆关联
+│       ├── biological_memory_engine.py      # 生物记忆引擎
+│       ├── openclaw_memory_engine_fixed.py  # 主引擎
+│       └── working_memory.py                # 基础工作记忆
+├── 📁 memory_storage/             # 主存储目录
+│   ├── 📄 {uuid1}.json            # 个人记忆文件
+│   ├── 📄 {uuid2}.json            # 单个记忆项
+│   └── ...                        # 其余24+个记忆文件
+├── 📁 compatibility_storage/      # 兼容性存储
+│   └── (旧版本格式备份)
+├── 📁 design/                     # 设计文档
+│   └── (架构图、流程图等)
+├── 📁 example_storage/            # 示例数据
+│   └── (演示用的样例记忆)
+├── 📁 legacy_archive/             # 遗留归档
+│   └── (废弃代码、历史版本)
+├── 📁 literature/                 # 研究文献
+│   └── (认知科学、心理学参考文献)
+├── 📁 summary/                    # 记忆摘要
+│   └── (总结性分析报告)
+├── 📄 redesign_plan.md            # 三层模型设计方案
+├── 📄 test_enhanced_memory.py     # 增强系统测试
+├── 📄 quick_test.py               # 快速测试脚本
+├── 📄 test_emotion.py             # 情感模块测试
+└── 📄 replace_all_unicode.py      # 编码处理工具
 
 ## Memory Lifecycle
 
